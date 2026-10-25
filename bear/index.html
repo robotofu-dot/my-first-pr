@@ -1,0 +1,225 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><style>body{margin:0}</style><title>大熊娃娃配音試聽</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a prompt-book — sticky transport bar on top, then the script as numbered cue rows grouped by act */
+:root{
+  --bg:#f3f5f1; --paper:#ffffff; --ink:#1d2a24; --muted:#5f6e66; --line:#d9e0da;
+  --pine:#1f5a45; --pine-soft:#e2eee8; --berry:#b2333a; --berry-soft:#f8e3e3; --gold:#a8741a; --gold-soft:#f8eed8;
+  --display:"Noto Serif TC","Songti TC",serif; --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --r-xiaogai:#c0572a; --r-jisu:#1f5a45; --r-xiaoma:#2d64a8; --r-xiaoya:#a33f7c; --r-xiaofu:#7a5bb0; --r-class:#6b7a3a; --r-narr:#5b5248;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111915; --paper:#18221d; --ink:#e6ece8; --muted:#97a69e; --line:#2b3832;
+  --pine:#6cc3a0; --pine-soft:#1d332a; --berry:#f0868b; --berry-soft:#3a2023; --gold:#e3b862; --gold-soft:#352a16;
+  --r-xiaogai:#f0915f; --r-jisu:#6cc3a0; --r-xiaoma:#7fb1f0; --r-xiaoya:#e48cc0; --r-xiaofu:#b9a0ea; --r-class:#b6c779; --r-narr:#c4b9ab; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111915; --paper:#18221d; --ink:#e6ece8; --muted:#97a69e; --line:#2b3832;
+  --pine:#6cc3a0; --pine-soft:#1d332a; --berry:#f0868b; --berry-soft:#3a2023; --gold:#e3b862; --gold-soft:#352a16;
+  --r-xiaogai:#f0915f; --r-jisu:#6cc3a0; --r-xiaoma:#7fb1f0; --r-xiaoya:#e48cc0; --r-xiaofu:#b9a0ea; --r-class:#b6c779; --r-narr:#c4b9ab; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:28px 18px}
+.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--muted)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(26px,5vw,38px);line-height:1.2;margin:4px 0 10px;text-wrap:balance}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.stats{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-size:14px}
+.stats b{font-variant-numeric:tabular-nums}
+.ok{color:var(--pine)} .warn{color:var(--gold)} .bad{color:var(--berry)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-block:1px solid var(--line)}
+.bar .wrap{padding-block:10px;display:flex;flex-direction:column;gap:8px}
+.now{display:flex;align-items:center;gap:10px;min-width:0}
+.now .meta{min-width:0;flex:1}
+.now .who{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.now .what{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.prog{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:4px;cursor:pointer}
+.prog i{display:block;height:100%;width:0;background:var(--pine)}
+button{font:inherit;color:inherit;cursor:pointer}
+.ctl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13px}
+.btn:hover{border-color:var(--pine)}
+.btn.on{background:var(--pine);border-color:var(--pine);color:var(--paper)}
+.btn:focus-visible,.take:focus-visible,.play:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+.big{width:40px;height:40px;border-radius:50%;border:0;background:var(--pine);color:var(--paper);display:grid;place-items:center;flex:none}
+.big svg{width:16px;height:16px;fill:currentColor}
+.sep{width:1px;height:20px;background:var(--line);margin:0 4px}
+.act{padding-block:26px 6px}
+.act h2{font-family:var(--display);font-weight:900;font-size:22px;margin:0;display:flex;align-items:baseline;gap:10px}
+.act h2 small{font-family:var(--body);font-weight:400;font-size:13px;color:var(--muted)}
+.cue{display:grid;grid-template-columns:52px 1fr;gap:4px 14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.cue:last-child{border-bottom:0}
+.cue.playing{background:linear-gradient(90deg,var(--pine-soft),transparent 70%)}
+.num{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.body{min-width:0}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.role{font-weight:700;font-size:14px}
+.hint{font-size:12px;color:var(--muted)}
+.flag{font-size:11px;padding:1px 8px;border-radius:999px;letter-spacing:.04em}
+.flag.part{background:var(--gold-soft);color:var(--gold)}
+.flag.miss{background:var(--berry-soft);color:var(--berry)}
+.script{margin:4px 0 0;font-size:15px}
+.heard{margin:6px 0 0;font-size:14px;color:var(--muted);display:flex;gap:6px}
+.heard span:first-child{flex:none;font-size:11px;letter-spacing:.08em;padding-top:2px}
+.diff{font-size:12.5px;color:var(--gold);margin-top:4px}
+.takes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.take{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:4px 10px 4px 8px;font-size:12.5px}
+.take svg{width:10px;height:10px;fill:currentColor;flex:none}
+.take .tc{font-family:var(--mono);color:var(--muted);font-size:11.5px}
+.take.rec{border-color:var(--pine);color:var(--pine)}
+.take.adlib{border-style:dashed}
+.take.active{background:var(--pine);color:var(--paper);border-color:var(--pine)}
+.take.active .tc{color:var(--paper)}
+.missing{color:var(--berry);font-size:13.5px;margin-top:6px}
+footer{padding-block:30px 40px;color:var(--muted);font-size:13px}
+footer code{font-family:var(--mono);font-size:12px;word-break:break-all}
+.hide{display:none}
+@media (max-width:520px){.cue{grid-template-columns:38px 1fr;gap:4px 10px}.sep{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="top wrap">
+  <div class="eyebrow">2026 台中聖雅各聖誕音樂劇・配音整理</div>
+  <h1>聖誕樹上的大熊娃娃</h1>
+  <p class="lede">88 句台詞依劇本順序排列。點任一個 take 就能試聽；實心綠框是建議採用的版本，虛線框是群聲即興。按上方「連續播放」可從任一句開始，依序聽完整齣對白。</p>
+  <div class="stats" id="stats"></div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="now">
+      <button class="big" id="pp" aria-label="連續播放"><svg viewBox="0 0 16 16" id="ppi"><path d="M3 1.5v13l11-6.5z"/></svg></button>
+      <div class="meta">
+        <div class="who" id="who">尚未播放</div>
+        <div class="what" id="what">點下方任一句，或按左邊從第 1 句連續播放</div>
+        <div class="prog" id="prog"><i id="pbar"></i></div>
+      </div>
+    </div>
+    <div class="ctl" id="roles"></div>
+    <div class="ctl">
+      <button class="btn" id="fIssue">只看有問題的句子</button>
+      <button class="btn on" id="fAd">顯示即興 take</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap" id="list"></main>
+
+<footer class="wrap">
+  <p>試聽音檔為壓縮預覽版。正式合成請用專案資料夾中的高音質分段檔 <code>分段台詞/</code>，檔名以錄音序號開頭，例如 <code>001_旁白_T2_建議_C008.mp3</code>；依劇本順序串好的草稿為 <code>聖誕樹上的大熊娃娃_對白順序合成草稿.mp3</code>。逐字稿為語音辨識後依劇本校正人名，音質與表演尚未試聽審核。配音員姓名待確認。</p>
+</footer>
+
+<audio id="au" preload="none"></audio>
+
+<script>
+const LINES = [{"n": 1, "a": "開場", "role": "旁白", "text": "各位大朋友、小朋友，歡迎您來到聖雅各劇場。為了維護演出品質，請將您的手機關機或改為震動。我們的演出即將開始。", "hint": "正式、清楚、面向觀眾", "takes": [{"t": 1, "f": "C007", "s": 3.2, "e": 18.9, "x": "各位大朋友小朋友，歡迎您來到聖雅各劇場。為了維護演出品質，請您將手機關機或改為震動。我們的演出即將開始。", "no": "檔頭 0–3 秒為「好，一遍，一二三開始」口令；「請將您的」念成「請您將」", "r": false, "st": "完整", "u": "clips/001_1.mp3", "c": "分段台詞/001_旁白_T1_C007.mp3"}, {"t": 2, "f": "C008", "s": 7.3, "e": 21.0, "x": "各位大朋友小朋友，歡迎您來到聖雅各劇場。為了維護演出品質，請將您的手機關機或改為震動。我們的演出即將開始。", "no": "與劇本一致（重錄 take）", "r": true, "st": "完整", "u": "clips/001_2.mp3", "c": "分段台詞/001_旁白_T2_建議_C008.mp3"}], "miss": null}, {"n": 2, "a": "第一幕", "role": "旁白", "text": "聖誕節快到了！五年一班正準備舉辦一場盛大的——「聖誕交換禮物派對！」", "hint": "活潑、帶入故事", "takes": [{"t": 1, "f": "C007", "s": 19.5, "e": 27.5, "x": "聖誕節快到了，五年一班正準備一場盛大的聖誕交換禮物派對。", "no": "少了「舉辦」", "r": true, "st": "完整", "u": "clips/002_1.mp3", "c": "分段台詞/002_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 3, "a": "第一幕", "role": "小馬", "text": "大家注意！今年的聖誕節，我們要舉辦一場是「聖誕交換禮物派對！」", "hint": "拍手；班長口吻", "takes": [{"t": 1, "f": "C009", "s": 7.6, "e": 14.2, "x": "大家注意，今年的聖誕節，我們要舉辦一場聖誕交換禮物派對。", "no": "少了劇本中的贅字「是」", "r": true, "st": "完整", "u": "clips/003_1.mp3", "c": "分段台詞/003_小馬_T1_建議_C009.mp3"}], "miss": null}, {"n": 4, "a": "第一幕", "role": "小馬", "text": "每個人都要準備一份禮物喔！", "hint": "提醒全班", "takes": [{"t": 1, "f": "C009", "s": 15.7, "e": 18.1, "x": "每個人都要準備一份禮物喔。", "no": "", "r": true, "st": "完整", "u": "clips/004_1.mp3", "c": "分段台詞/004_小馬_T1_建議_C009.mp3"}], "miss": null}, {"n": 5, "a": "第一幕", "role": "同學們", "text": "哇——好久沒辦聖誕交換禮物了…要準備什麼好呢？", "hint": "多人、興奮", "takes": [{"t": 1, "f": "CAM18", "s": 24.9, "e": 30.8, "x": "好久都沒有辦聖誕節交換禮物了耶，該準備什麼呢？", "no": "群聲版本一，用詞略改", "r": true, "st": "完整", "u": "clips/005_1.mp3", "c": "分段台詞/005_同學們_T1_建議_CAM18.mp3"}, {"t": 2, "f": "CAM18", "s": 32.3, "e": 40.2, "x": "哇，好期待好期待喔。／好久沒有聖誕節交換禮物呢，真的欸，好期待喲。", "no": "群聲版本二（即興延伸），可疊作背景", "r": false, "st": "即興", "u": "clips/005_2.mp3", "c": "分段台詞/005_同學們_T2_CAM18.mp3"}], "miss": null}, {"n": 6, "a": "第一幕", "role": "小夫", "text": "我已經想了！我會準備了最新款的樂高機器人！", "hint": "驕傲地說", "takes": [{"t": 1, "f": "C014", "s": 3.5, "e": 7.8, "x": "我已經想了，我會準備最新款的樂高機器人。", "no": "與劇本一致", "r": true, "st": "完整", "u": "clips/006_1.mp3", "c": "分段台詞/006_小夫_T1_建議_C014.mp3"}, {"t": 2, "f": "C015", "s": 0.9, "e": 4.8, "x": "我已經想了，我會準備最新款的樂高機器人。", "no": "與劇本一致（重錄 take）", "r": false, "st": "完整", "u": "clips/006_2.mp3", "c": "分段台詞/006_小夫_T2_C015.mp3"}, {"t": 3, "f": "C011", "s": 6.0, "e": 10.3, "x": "我已經想了，我會準備最新款的樂高機器人。", "no": "此段在小亞的錄音檔開頭，聲紋比對為小夫（與 C014/C015 相似度約 0.8），角色待人工確認", "r": false, "st": "完整", "u": "clips/006_3.mp3", "c": "分段台詞/006_小夫_T3_C011.mp3"}, {"t": 4, "f": "C013", "s": 4.5, "e": 5.7, "x": "我已經想好了。", "no": "只說了半句即中斷，之後是現場討論麥克風，不可用", "r": false, "st": "未完成", "u": "clips/006_4.mp3", "c": "分段台詞/006_小夫_T4_C013.mp3"}], "miss": null}, {"n": 7, "a": "第一幕", "role": "同學們", "text": "哇——！好厲害！我好想要抽到這個喔！", "hint": "羨慕、興奮", "takes": [{"t": 1, "f": "CAM18", "s": 42.3, "e": 45.9, "x": "喔，那麼厲害喔，我好想抽到這一個。", "no": "少了「哇——！」", "r": true, "st": "完整", "u": "clips/007_1.mp3", "c": "分段台詞/007_同學們_T1_建議_CAM18.mp3"}, {"t": 2, "f": "CAM18", "s": 48.4, "e": 52.3, "x": "我好想要戰鬥陀螺，我會不會可以抽到戰鬥陀螺呢？", "no": "劇本外即興，可作背景群聲", "r": false, "st": "即興", "u": "clips/007_2.mp3", "c": "分段台詞/007_同學們_T2_CAM18.mp3"}, {"t": 3, "f": "CAM18", "s": 55.2, "e": 64.0, "x": "知道那個最可愛、現在很流行的莉卡娃娃嗎？我超想要那個莉卡娃娃的欸。", "no": "劇本外即興，可作背景群聲", "r": false, "st": "即興", "u": "clips/007_3.mp3", "c": "分段台詞/007_同學們_T3_CAM18.mp3"}, {"t": 4, "f": "CAM18", "s": 65.0, "e": 76.5, "x": "欸，上次你們有沒有拿到牧師給的那個卡片？我真的覺得那個卡片好棒喔，它可以陪我們很久很久很久欸。", "no": "劇本外即興，可作背景群聲", "r": false, "st": "即興", "u": "clips/007_4.mp3", "c": "分段台詞/007_同學們_T4_CAM18.mp3"}], "miss": null}, {"n": 8, "a": "第一幕", "role": "小亞", "text": "小該！你很討厭耶！不幫忙就算了，幹嘛還搗蛋？", "hint": "生氣", "takes": [{"t": 1, "f": "C011", "s": 11.8, "e": 16.2, "x": "小該，你很討厭耶，不幫忙就算了，幹嘛還搗蛋？", "no": "與劇本一致", "r": false, "st": "完整", "u": "clips/008_1.mp3", "c": "分段台詞/008_小亞_T1_C011.mp3"}, {"t": 2, "f": "C012", "s": 3.9, "e": 9.2, "x": "小該，你很討厭耶，不幫忙就算了，幹嘛還搗蛋？", "no": "與劇本一致", "r": true, "st": "完整", "u": "clips/008_2.mp3", "c": "分段台詞/008_小亞_T2_建議_C012.mp3"}], "miss": null}, {"n": 9, "a": "第一幕", "role": "同學", "text": "他反正每年都這樣。不要理他。", "hint": "嫌棄、冷淡", "takes": [{"t": 1, "f": "CAM18", "s": 79.7, "e": 84.3, "x": "喔……每年都這樣了，不要理他啦，煩死了。", "no": "多了「煩死了」", "r": true, "st": "完整", "u": "clips/009_1.mp3", "c": "分段台詞/009_同學_T1_建議_CAM18.mp3"}, {"t": 2, "f": "CAM18", "s": 85.9, "e": 90.5, "x": "哇喲，小該幹嘛這樣啊，真的是。", "no": "劇本外即興反應，可接在第 9 句後", "r": false, "st": "即興", "u": "clips/009_2.mp3", "c": "分段台詞/009_同學_T2_CAM18.mp3"}], "miss": null}, {"n": 10, "a": "第一幕", "role": "小該", "text": "哼！交換禮物最無聊了！我才不稀罕！", "hint": "心虛、故意裝得滿不在乎", "takes": [{"t": 1, "f": "C016", "s": 12.7, "e": 16.6, "x": "（哼）交換禮物最無聊了，我才不稀罕。", "no": "轉寫未出現「哼」，待確認開頭是否有念", "r": true, "st": "完整", "u": "clips/010_1.mp3", "c": "分段台詞/010_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 11, "a": "第一幕", "role": "旁白", "text": "小該個子小小的，在班上人緣不好。他就像聖經裡的稅吏撒該一樣，因為常常做會讓人生氣的事情，大家不喜歡他、排擠他。久而久之，小該也把自己的心關了起來。", "hint": "敘事、稍帶同理", "takes": [{"t": 1, "f": "C007", "s": 28.5, "e": 48.4, "x": "小該個子小小的，在班上人緣不好，他就像聖經裡的稅吏撒該一樣，因為常常會做出讓人生氣的事情，大家不喜歡他、排擠他。久而久之，小該也把自己的心關了起來。", "no": "「做會讓人」念成「會做出讓人」", "r": true, "st": "完整", "u": "clips/011_1.mp3", "c": "分段台詞/011_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 12, "a": "第二幕", "role": "旁白", "text": "終於到了派對當天！吉蘇老師走進教室。", "hint": "期待感", "takes": [{"t": 1, "f": "C007", "s": 50.0, "e": 55.0, "x": "終於到了派對當天，吉蘇老師走進教室。", "no": "", "r": true, "st": "完整", "u": "clips/012_1.mp3", "c": "分段台詞/012_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 13, "a": "第二幕", "role": "同學們", "text": "老師！看我的！老師，我準備了超棒的禮物！老師，先看我的！", "hint": "多人搶著說、熱鬧", "takes": [{"t": 1, "f": "CAM18", "s": 95.1, "e": 125.3, "x": "老師老師，你看我的你看我的，我準備了好棒好棒好棒的禮物。欸老師，你先看我的。／老師老師，我的我的，你趕快看我的。／老師老師這裡這裡，你看我的。／老師老師老師老師……這是我的禮物，你看酷不酷？", "no": "多人搶話版，比劇本長，約 30 秒", "r": true, "st": "完整", "u": "clips/013_1.mp3", "c": "分段台詞/013_同學們_T1_建議_CAM18.mp3"}], "miss": null}, {"n": 14, "a": "第二幕", "role": "小該", "text": "可惡……我都看不到……", "hint": "小聲、不滿", "takes": [{"t": 1, "f": "C016", "s": 17.7, "e": 20.4, "x": "可惡……我都看不到。", "no": "", "r": true, "st": "完整", "u": "clips/014_1.mp3", "c": "分段台詞/014_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 15, "a": "第二幕", "role": "小該", "text": "有了！", "hint": "突然想到辦法", "takes": [{"t": 1, "f": "C016", "s": 21.9, "e": 22.7, "x": "有了！", "no": "", "r": true, "st": "完整", "u": "clips/015_1.mp3", "c": "分段台詞/015_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 16, "a": "第二幕", "role": "旁白", "text": "當年的撒該，為了看耶穌，爬上了桑樹。而今天的校園裡，小該為了看清楚聖誕派對——竟然爬上了聖誕樹！", "hint": "戲劇性、帶笑點", "takes": [{"t": 1, "f": "C007", "s": 57.3, "e": 69.5, "x": "當年的撒該為了看耶穌，爬上了桑樹。而今天的教室裡，小該為了看清楚聖誕派對，竟然爬上了聖誕樹。", "no": "「校園裡」念成「教室裡」", "r": true, "st": "完整", "u": "clips/016_1.mp3", "c": "分段台詞/016_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 17, "a": "第二幕", "role": "吉蘇老師", "text": "咦？聖誕樹上……怎麼結了一顆這麼大的——「果實」呀？", "hint": "發現、幽默", "takes": [{"t": 1, "f": "CAM17", "s": 10.2, "e": 17.9, "x": "咦？聖誕樹上怎麼結了一顆這麼大的果實啊？", "no": "", "r": true, "st": "完整", "u": "clips/017_1.mp3", "c": "分段台詞/017_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 18, "a": "第二幕", "role": "同學們", "text": "哈哈哈哈！那不是果實啦！是小該！", "hint": "全班大笑", "takes": [{"t": 1, "f": "CAM18", "s": 132.0, "e": 148.8, "x": "是果實還是小該？／哎呦老師老師，那個不是果實，是小該，是小該。／哎呦，是小該啦，那個不是果實。", "no": "多人版本；轉寫未出現「哈哈哈哈」笑聲，待確認", "r": true, "st": "完整", "u": "clips/018_1.mp3", "c": "分段台詞/018_同學們_T1_建議_CAM18.mp3"}], "miss": null}, {"n": 19, "a": "第二幕", "role": "小馬", "text": "老師，那是小該啦！他一定又想在上面丟粉筆惡作劇了！", "hint": "提醒老師、帶點無奈", "takes": [{"t": 1, "f": "C009", "s": 20.0, "e": 27.0, "x": "老師，那是小該啦，他一定又在上面想要丟粉筆惡作劇了。", "no": "「又想在上面丟粉筆」念成「又在上面想要丟粉筆」", "r": true, "st": "完整", "u": "clips/019_1.mp3", "c": "分段台詞/019_小馬_T1_建議_C009.mp3"}], "miss": null}, {"n": 20, "a": "第二幕", "role": "小該", "text": "我……我只是……", "hint": "緊張、臉紅", "takes": [{"t": 1, "f": "C016", "s": 24.9, "e": 28.1, "x": "我只是……我、我、我只是……", "no": "", "r": true, "st": "完整", "u": "clips/020_1.mp3", "c": "分段台詞/020_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 21, "a": "第二幕", "role": "吉蘇老師", "text": "小該，快下來吧。", "hint": "溫柔、不責備", "takes": [{"t": 1, "f": "CAM17", "s": 20.5, "e": 24.1, "x": "小該，快下來，快下來。", "no": "「快下來吧」改為「快下來，快下來」", "r": true, "st": "完整", "u": "clips/021_1.mp3", "c": "分段台詞/021_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 22, "a": "第二幕", "role": "小該", "text": "啊？", "hint": "疑惑", "takes": [{"t": 1, "f": "C016", "s": 29.6, "e": 30.4, "x": "啊？", "no": "", "r": true, "st": "完整", "u": "clips/022_1.mp3", "c": "分段台詞/022_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 23, "a": "第二幕", "role": "吉蘇老師", "text": "今天是聖誕節。我的派對座位，想坐在你旁邊。等一下，我想坐在你旁邊一起吃點心。可以嗎？", "hint": "溫暖、邀請", "takes": [{"t": 1, "f": "CAM17", "s": 25.7, "e": 37.2, "x": "今天是聖誕節，我可以坐在你的旁邊嗎？因為我想要跟你一起吃點心，可以嗎？", "no": "句子改寫，意思相同", "r": true, "st": "完整", "u": "clips/023_1.mp3", "c": "分段台詞/023_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 24, "a": "第二幕", "role": "小該", "text": "老師……你要跟我坐？", "hint": "驚訝、受寵若驚", "takes": [{"t": 1, "f": "C016", "s": 32.4, "e": 35.5, "x": "老師，你想坐我旁邊？", "no": "劇本為「你要跟我坐？」", "r": true, "st": "完整", "u": "clips/024_1.mp3", "c": "分段台詞/024_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 25, "a": "第二幕", "role": "吉蘇老師", "text": "是的，快下來吧。", "hint": "再次溫柔邀請", "takes": [{"t": 1, "f": "CAM17", "s": 40.0, "e": 44.6, "x": "是的。小該，快下來吧。", "no": "多了「小該」", "r": true, "st": "完整", "u": "clips/025_1.mp3", "c": "分段台詞/025_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 26, "a": "第三幕", "role": "旁白", "text": "當年的撒該，因為耶穌對他的愛，生命開始改變。此時此刻，小該心裡冰凍的雪，也因為吉蘇老師的溫暖，一點一點地融化了。", "hint": "溫暖、感人", "takes": [{"t": 1, "f": "C007", "s": 71.4, "e": 86.0, "x": "當年的撒該，因為耶穌對他的愛，生命開始改變。此時此刻，小該心裡冰凍的雪，也因為吉蘇老師的溫暖，一點……", "no": "句尾「一點地融化了」缺失：85.3 秒起出現完全無聲，疑似檔案被剪輯，需補錄或找原始檔", "r": true, "st": "部分", "u": "clips/026_1.mp3", "c": "分段台詞/026_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 27, "a": "第三幕", "role": "小該", "text": "老師……", "hint": "小聲", "takes": [{"t": 1, "f": "C016", "s": 40.9, "e": 42.0, "x": "老師……", "no": "", "r": true, "st": "完整", "u": "clips/027_1.mp3", "c": "分段台詞/027_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 28, "a": "第三幕", "role": "吉蘇老師", "text": "怎麼了？", "hint": "關心", "takes": [{"t": 1, "f": "CAM17", "s": 48.9, "e": 49.8, "x": "怎麼了？", "no": "", "r": true, "st": "完整", "u": "clips/028_1.mp3", "c": "分段台詞/028_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 29, "a": "第三幕", "role": "小該", "text": "其實……我今年有準備禮物。可是……我不敢拿出來。", "hint": "小聲、坦白、害怕", "takes": [{"t": 1, "f": "C016", "s": 43.2, "e": 50.7, "x": "其實我今年有準備禮物，可是我不敢拿出來。", "no": "", "r": true, "st": "完整", "u": "clips/029_1.mp3", "c": "分段台詞/029_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 30, "a": "第三幕", "role": "小該", "text": "這是我最心愛的大熊娃娃。我把它洗得很乾淨，縫好了它的手，還幫它圍上圍巾。", "hint": "珍惜、真誠", "takes": [{"t": 1, "f": "C016", "s": 51.9, "e": 61.1, "x": "這是我最心愛的大熊娃娃，我把它洗得很乾淨，縫好了它的手，還幫它圍上圍巾。", "no": "", "r": true, "st": "完整", "u": "clips/030_1.mp3", "c": "分段台詞/030_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 31, "a": "第三幕", "role": "小該", "text": "我想把它送給班上……可是我怕……大家會覺得它不是新買的。會嫌棄它。", "hint": "脆弱、害怕被拒絕", "takes": [{"t": 1, "f": "C016", "s": 62.4, "e": 72.1, "x": "我想把它送給班上的同學，可是我怕大家會覺得它不是新買的，會嫌棄它。", "no": "多了「的同學」", "r": true, "st": "完整", "u": "clips/031_1.mp3", "c": "分段台詞/031_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 32, "a": "第三幕", "role": "小馬", "text": "哇……好軟喔！", "hint": "驚喜", "takes": [{"t": 1, "f": "C009", "s": 28.6, "e": 34.8, "x": "哇，好軟喔，這隻熊抱起來很溫暖呢。", "no": "第 32、33 句連在一起錄，同一段", "r": true, "st": "完整", "u": "clips/032_1.mp3", "c": "分段台詞/032_小馬_T1_建議_C009.mp3"}], "miss": null}, {"n": 33, "a": "第三幕", "role": "小馬", "text": "這隻熊抱起來……好溫暖。", "hint": "感受到溫暖", "takes": [{"t": 1, "f": "C009", "s": 28.6, "e": 34.8, "x": "哇，好軟喔，這隻熊抱起來很溫暖呢。", "no": "與第 32 句同一段；「好溫暖」念成「很溫暖呢」", "r": true, "st": "完整", "u": "clips/033_1.mp3", "c": "分段台詞/033_小馬_T1_建議_C009.mp3"}], "miss": null}, {"n": 34, "a": "第三幕", "role": "小夫", "text": "恩…這隻熊好像真的很好抱。", "hint": "認同、自然", "takes": [{"t": 1, "f": "C014", "s": 9.9, "e": 12.8, "x": "嗯，這隻熊好像真的很好抱。", "no": "", "r": true, "st": "完整", "u": "clips/034_1.mp3", "c": "分段台詞/034_小夫_T1_建議_C014.mp3"}, {"t": 2, "f": "C015", "s": 6.7, "e": 9.8, "x": "嗯，這隻熊……好像真的很好抱。", "no": "中間有停頓", "r": false, "st": "完整", "u": "clips/034_2.mp3", "c": "分段台詞/034_小夫_T2_C015.mp3"}], "miss": null}, {"n": 35, "a": "第三幕", "role": "小亞", "text": "小該。", "hint": "輕聲", "takes": [{"t": 1, "f": "C011", "s": 24.7, "e": 25.4, "x": "小該。", "no": "", "r": false, "st": "完整", "u": "clips/035_1.mp3", "c": "分段台詞/035_小亞_T1_C011.mp3"}, {"t": 2, "f": "C012", "s": 11.5, "e": 12.6, "x": "小該。", "no": "", "r": true, "st": "完整", "u": "clips/035_2.mp3", "c": "分段台詞/035_小亞_T2_建議_C012.mp3"}], "miss": null}, {"n": 36, "a": "第三幕", "role": "小該", "text": "嗯？", "hint": "回應", "takes": [{"t": 1, "f": "C016", "s": 74.5, "e": 75.4, "x": "嗯？", "no": "", "r": true, "st": "完整", "u": "clips/036_1.mp3", "c": "分段台詞/036_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 37, "a": "第三幕", "role": "小亞", "text": "謝謝你的大熊。", "hint": "真誠", "takes": [{"t": 1, "f": "C011", "s": 27.4, "e": 28.7, "x": "謝謝你的大熊。", "no": "", "r": false, "st": "完整", "u": "clips/037_1.mp3", "c": "分段台詞/037_小亞_T1_C011.mp3"}, {"t": 2, "f": "C012", "s": 15.0, "e": 16.6, "x": "謝謝你的大熊。", "no": "", "r": true, "st": "完整", "u": "clips/037_2.mp3", "c": "分段台詞/037_小亞_T2_建議_C012.mp3"}], "miss": null}, {"n": 38, "a": "第三幕", "role": "小該", "text": "真的？", "hint": "意外、帶笑", "takes": [{"t": 1, "f": "C016", "s": 76.6, "e": 77.7, "x": "真的？", "no": "", "r": true, "st": "完整", "u": "clips/038_1.mp3", "c": "分段台詞/038_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 39, "a": "第三幕", "role": "小亞", "text": "真的。但是……你以前做過的那些事情，我還是會記得。", "hint": "誠實、保留", "takes": [{"t": 1, "f": "C011", "s": 31.3, "e": 36.7, "x": "真的。但是……你以前做過的那些事情，我還是會記得。", "no": "", "r": false, "st": "完整", "u": "clips/039_1.mp3", "c": "分段台詞/039_小亞_T1_C011.mp3"}, {"t": 2, "f": "C012", "s": 19.1, "e": 27.2, "x": "真的。但是……你以前做過的那些事情，我還是會記得。", "no": "", "r": true, "st": "完整", "u": "clips/039_2.mp3", "c": "分段台詞/039_小亞_T2_建議_C012.mp3"}], "miss": null}, {"n": 40, "a": "第三幕", "role": "小該", "text": "……我知道。", "hint": "低落、接受", "takes": [{"t": 1, "f": "C016", "s": 79.5, "e": 80.5, "x": "我知道。", "no": "", "r": true, "st": "完整", "u": "clips/040_1.mp3", "c": "分段台詞/040_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 41, "a": "第三幕", "role": "小亞", "text": "所以……我可能沒有辦法一下子就跟你變成好朋友。", "hint": "誠實、平靜", "takes": [{"t": 1, "f": "C011", "s": 38.4, "e": 44.6, "x": "所以……我可能沒有辦法一下子就跟你變成好朋友。", "no": "", "r": false, "st": "完整", "u": "clips/041_1.mp3", "c": "分段台詞/041_小亞_T1_C011.mp3"}, {"t": 2, "f": "C012", "s": 30.0, "e": 36.4, "x": "所以……我可能沒有辦法一下子就跟你變成好朋友。", "no": "", "r": true, "st": "完整", "u": "clips/041_2.mp3", "c": "分段台詞/041_小亞_T2_建議_C012.mp3"}], "miss": null}, {"n": 42, "a": "第三幕", "role": "小該", "text": "那是什麼？", "hint": "疑惑", "takes": [{"t": 1, "f": "C016", "s": 84.6, "e": 85.9, "x": "那是什麼？", "no": "", "r": true, "st": "完整", "u": "clips/042_1.mp3", "c": "分段台詞/042_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 43, "a": "第三幕", "role": "吉蘇老師", "text": "小該，真正的改變，不一定是別人馬上忘記你以前做錯的事。", "hint": "溫柔、認真", "takes": [{"t": 1, "f": "CAM17", "s": 54.4, "e": 62.2, "x": "小該，真正改變的，不一定是別人馬上忘記你以前所做的事。", "no": "「做錯的事」念成「所做的事」", "r": true, "st": "完整", "u": "clips/043_1.mp3", "c": "分段台詞/043_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 44, "a": "第三幕", "role": "小該", "text": "如果我又想惡作劇呢？", "hint": "擔心", "takes": [{"t": 1, "f": "C016", "s": 87.5, "e": 90.4, "x": "如果我又想惡作劇呢？", "no": "", "r": true, "st": "完整", "u": "clips/044_1.mp3", "c": "分段台詞/044_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 45, "a": "第三幕", "role": "吉蘇老師", "text": "先停下來。", "hint": "簡短、堅定", "takes": [{"t": 1, "f": "CAM17", "s": 68.6, "e": 70.6, "x": "那就先停下來。", "no": "多了「那就」", "r": true, "st": "完整", "u": "clips/045_1.mp3", "c": "分段台詞/045_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 46, "a": "第三幕", "role": "小該", "text": "如果我停不下來，又犯錯呢？", "hint": "擔心", "takes": [{"t": 1, "f": "C016", "s": 92.0, "e": 95.3, "x": "如果我停不下來，又犯錯呢？", "no": "", "r": true, "st": "完整", "u": "clips/046_1.mp3", "c": "分段台詞/046_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 47, "a": "第三幕", "role": "吉蘇老師", "text": "那就承認，回頭道歉。", "hint": "溫柔但堅定", "takes": [{"t": 1, "f": "CAM17", "s": 73.9, "e": 77.0, "x": "就承認，回頭向對方道歉。", "no": "「那就」念成「就」，多了「向對方」", "r": true, "st": "完整", "u": "clips/047_1.mp3", "c": "分段台詞/047_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 48, "a": "第三幕", "role": "小該", "text": "好。我試試看。", "hint": "下定決心", "takes": [{"t": 1, "f": "C016", "s": 96.9, "e": 100.0, "x": "好，我試試看。", "no": "", "r": true, "st": "完整", "u": "clips/048_1.mp3", "c": "分段台詞/048_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 49, "a": "第四幕", "role": "吉蘇老師", "text": "喔喔，是的。好，我立刻去。", "hint": "接電話", "takes": [{"t": 1, "f": "CAM17", "s": 80.2, "e": 84.3, "x": "喔喔，好的好的，我現在立刻馬上去。", "no": "用詞略改", "r": true, "st": "完整", "u": "clips/049_1.mp3", "c": "分段台詞/049_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 50, "a": "第四幕", "role": "吉蘇老師", "text": "老師先離開一下。小馬，這裡交給你喔。", "hint": "交代事情", "takes": [{"t": 1, "f": "CAM17", "s": 84.5, "e": 89.9, "x": "老師先離開一下。小馬，這裡交給你喔。", "no": "", "r": true, "st": "完整", "u": "clips/050_1.mp3", "c": "分段台詞/050_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 51, "a": "第四幕", "role": "小馬", "text": "好！既然大家都已經把禮物拿出來了，我們開始交換禮物！", "hint": "活潑、主持", "takes": [{"t": 1, "f": "C009", "s": 37.6, "e": 43.0, "x": "好，既然大家都已經把禮物拿出來了，那我們就開始交換禮物吧。", "no": "多了「那、就、吧」", "r": true, "st": "完整", "u": "clips/051_1.mp3", "c": "分段台詞/051_小馬_T1_建議_C009.mp3"}], "miss": null}, {"n": 52, "a": "第四幕", "role": "小馬", "text": "第一個——小夫", "hint": "宣布抽籤", "takes": [{"t": 1, "f": "C009", "s": 44.8, "e": 46.8, "x": "第一個——小夫。", "no": "", "r": true, "st": "完整", "u": "clips/052_1.mp3", "c": "分段台詞/052_小馬_T1_建議_C009.mp3"}], "miss": null}, {"n": 53, "a": "第四幕", "role": "小馬", "text": "下一個！小該！", "hint": "宣布", "takes": [{"t": 1, "f": "C009", "s": 47.7, "e": 49.7, "x": "下一個——小該。", "no": "", "r": true, "st": "完整", "u": "clips/053_1.mp3", "c": "分段台詞/053_小馬_T1_建議_C009.mp3"}], "miss": null}, {"n": 54, "a": "第四幕", "role": "小亞", "text": "小該！", "hint": "抓到作弊、立即制止", "takes": [{"t": 1, "f": "C012", "s": 38.7, "e": 39.4, "x": "小該！", "no": "", "r": true, "st": "完整", "u": "clips/054_1.mp3", "c": "分段台詞/054_小亞_T1_建議_C012.mp3"}], "miss": null}, {"n": 55, "a": "第四幕", "role": "小該", "text": "我沒有！", "hint": "立刻否認", "takes": [{"t": 1, "f": "C016", "s": 104.5, "e": 105.2, "x": "我沒有！", "no": "", "r": true, "st": "完整", "u": "clips/055_1.mp3", "c": "分段台詞/055_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 56, "a": "第四幕", "role": "小亞", "text": "你明明就有！", "hint": "拿出證據、直接", "takes": [{"t": 1, "f": "C012", "s": 40.9, "e": 42.2, "x": "你明明就有！", "no": "", "r": true, "st": "完整", "u": "clips/056_1.mp3", "c": "分段台詞/056_小亞_T1_建議_C012.mp3"}], "miss": null}, {"n": 57, "a": "第四幕", "role": "小該", "text": "我只是……", "hint": "被抓包", "takes": [{"t": 1, "f": "C016", "s": 107.0, "e": 109.9, "x": "我只是……我只是……", "no": "", "r": true, "st": "完整", "u": "clips/057_1.mp3", "c": "分段台詞/057_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 58, "a": "第四幕", "role": "小馬", "text": "喔…小該…", "hint": "無奈、觀察", "takes": [{"t": 1, "f": "C009", "s": 51.1, "e": 53.3, "x": "喔……小該……", "no": "", "r": true, "st": "完整", "u": "clips/058_1.mp3", "c": "分段台詞/058_小馬_T1_建議_C009.mp3"}], "miss": null}, {"n": 59, "a": "第四幕", "role": "旁白", "text": "小該原本想嘴硬。他張開嘴正想要反駁的時候，吉蘇老師的聲音出現在小該心裡：停下來，回頭。", "hint": "敘事，內心聲音可略帶停頓", "takes": [{"t": 1, "f": "C007", "s": 89.8, "e": 102.0, "x": "……嘴硬。……對，這……出現在小該的心裡：停下來，回頭吧。", "no": "只剩片段：85.3–89.9、91.6–92.4、93.0–96.1 秒為完全無聲，疑似被剪掉，前半句「小該原本想嘴硬，他張開嘴正想要反駁的時候，吉蘇老師的聲音」大多缺失，需補錄", "r": true, "st": "部分", "u": "clips/059_1.mp3", "c": "分段台詞/059_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 60, "a": "第四幕", "role": "小該", "text": "對不起！", "hint": "大聲、真誠", "takes": [{"t": 1, "f": "C016", "s": 112.3, "e": 113.5, "x": "對不起！", "no": "", "r": true, "st": "完整", "u": "clips/060_1.mp3", "c": "分段台詞/060_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 61, "a": "第四幕", "role": "小該", "text": "我剛剛想要偷看。對不起。", "hint": "承認錯誤", "takes": [{"t": 1, "f": "C016", "s": 113.9, "e": 116.2, "x": "我剛想要偷看，對不起。", "no": "「剛剛」念成「剛」", "r": true, "st": "完整", "u": "clips/061_1.mp3", "c": "分段台詞/061_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 62, "a": "第四幕", "role": "小亞", "text": "欸？", "hint": "意外", "takes": [{"t": 1, "f": "C012", "s": 45.2, "e": 45.9, "x": "欸？", "no": "", "r": true, "st": "完整", "u": "clips/062_1.mp3", "c": "分段台詞/062_小亞_T1_建議_C012.mp3"}, {"t": 2, "f": "C011", "s": 48.8, "e": 49.8, "x": "（疑似「欸？」）", "no": "轉寫無文字，待人工確認", "r": false, "st": "待審", "u": "clips/062_2.mp3", "c": "分段台詞/062_小亞_T2_C011.mp3"}], "miss": null}, {"n": 63, "a": "第四幕", "role": "同學", "text": "他今天怎麼這麼快就承認？", "hint": "竊竊私語", "takes": [], "miss": "在 12 個檔案中都沒有找到這句（同學竊竊私語）"}, {"n": 64, "a": "第四幕", "role": "同學", "text": "對啊，他以前不是都說「不是我」嗎？", "hint": "竊竊私語", "takes": [], "miss": "在 12 個檔案中都沒有找到這句（同學竊竊私語）"}, {"n": 65, "a": "第四幕", "role": "小馬", "text": "小該，因為你剛剛偷看，所以抽到的這個不算。", "hint": "公平、平靜", "takes": [{"t": 1, "f": "C009", "s": 54.8, "e": 61.0, "x": "小該，剛剛你偷看，所以呢，抽到的這個就不算囉。", "no": "語序改動", "r": false, "st": "完整", "u": "clips/065_1.mp3", "c": "分段台詞/065_小馬_T1_C009.mp3"}, {"t": 2, "f": "C010", "s": 4.9, "e": 10.1, "x": "小該，因為你剛剛偷看，所以抽到的這個不算喔。", "no": "與劇本一致（重錄 take）", "r": true, "st": "完整", "u": "clips/065_2.mp3", "c": "分段台詞/065_小馬_T2_建議_C010.mp3"}], "miss": null}, {"n": 66, "a": "第五幕", "role": "旁白", "text": "聖誕交換禮物結束了，大家都在看著自己抽到的禮物。小亞抽到小夫提供最新款的樂高機器人。", "hint": "收束、輕快", "takes": [{"t": 1, "f": "C007", "s": 104.0, "e": 114.6, "x": "聖誕交換禮物結束了，大家都在看自己抽到的禮物，小亞抽到了小夫提供最新款的樂高機器人。", "no": "", "r": true, "st": "完整", "u": "clips/066_1.mp3", "c": "分段台詞/066_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 67, "a": "第五幕", "role": "同學", "text": "喔，小亞你真幸運，抽到最酷的禮物", "hint": "羨慕", "takes": [{"t": 1, "f": "CAM18", "s": 158.7, "e": 164.1, "x": "小亞，你也太幸運了吧，你抽到最酷的禮物欸。", "no": "", "r": true, "st": "完整", "u": "clips/067_1.mp3", "c": "分段台詞/067_同學_T1_建議_CAM18.mp3"}, {"t": 2, "f": "CAM18", "s": 165.3, "e": 183.4, "x": "喔，小亞，好羨慕你喔，你抽到了小夫的樂高機器人，欸怎麼那麼好？／小亞你抽到的喔，這麼酷的禮物也太棒了吧。", "no": "其他同學的版本，可疊作背景", "r": false, "st": "即興", "u": "clips/067_2.mp3", "c": "分段台詞/067_同學_T2_CAM18.mp3"}], "miss": null}, {"n": 68, "a": "第五幕", "role": "小亞", "text": "小夫，謝謝你喔", "hint": "自然", "takes": [{"t": 1, "f": "C012", "s": 48.6, "e": 50.5, "x": "小夫，謝謝你喔。", "no": "", "r": true, "st": "完整", "u": "clips/068_1.mp3", "c": "分段台詞/068_小亞_T1_建議_C012.mp3"}], "miss": null}, {"n": 69, "a": "第五幕", "role": "小夫", "text": "哎呀這沒什麼啦～", "hint": "輕鬆、得意", "takes": [{"t": 1, "f": "C014", "s": 15.2, "e": 17.6, "x": "哎呀，這沒什麼啦。", "no": "", "r": true, "st": "完整", "u": "clips/069_1.mp3", "c": "分段台詞/069_小夫_T1_建議_C014.mp3"}, {"t": 2, "f": "C015", "s": 11.9, "e": 14.1, "x": "哎呀，這沒有什麼啦。", "no": "", "r": false, "st": "完整", "u": "clips/069_2.mp3", "c": "分段台詞/069_小夫_T2_C015.mp3"}], "miss": null}, {"n": 70, "a": "第五幕", "role": "吉蘇老師", "text": "哎呀，你們抽完啦～", "hint": "輕鬆", "takes": [{"t": 1, "f": "CAM17", "s": 94.6, "e": 96.9, "x": "哎呀，你們都抽完了呀。", "no": "", "r": true, "st": "完整", "u": "clips/070_1.mp3", "c": "分段台詞/070_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 71, "a": "第五幕", "role": "同學", "text": "老師，你看我抽到…", "hint": "興奮，可依現場多人分配", "takes": [{"t": 1, "f": "CAM18", "s": 187.6, "e": 190.7, "x": "老師老師，你看我抽到的，老師老師。", "no": "", "r": true, "st": "完整", "u": "clips/071_1.mp3", "c": "分段台詞/071_同學_T1_建議_CAM18.mp3"}, {"t": 2, "f": "CAM18", "s": 192.5, "e": 207.3, "x": "老師，你看我抽到的，老師你有沒有看到？／老師老師老師老師，你看我抽到的禮物很可愛吧。", "no": "其他同學的版本，可疊作背景", "r": false, "st": "即興", "u": "clips/071_2.mp3", "c": "分段台詞/071_同學_T2_CAM18.mp3"}], "miss": null}, {"n": 72, "a": "第五幕", "role": "吉蘇老師", "text": "放學時間到了，你們的爸爸媽媽在校門外等你們了，趕快回家吧！聖誕快樂！", "hint": "老師口吻、溫暖", "takes": [{"t": 1, "f": "CAM17", "s": 98.7, "e": 110.6, "x": "嗯，我們放學的時間也到了，你們的爸爸媽媽也在校門口外面等你們囉，趕快回家，祝福你們聖誕節快樂。", "no": "句子改寫，意思相同", "r": true, "st": "完整", "u": "clips/072_1.mp3", "c": "分段台詞/072_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 73, "a": "第五幕", "role": "同學", "text": "聖誕快樂！聖誕快樂！", "hint": "多人、開心", "takes": [{"t": 1, "f": "CAM18", "s": 213.3, "e": 224.8, "x": "聖誕快樂！聖誕快樂！聖誕快樂！聖誕快樂！Merry Christmas! Merry Christmas!", "no": "多人版本，多了英文", "r": true, "st": "完整", "u": "clips/073_1.mp3", "c": "分段台詞/073_同學_T1_建議_CAM18.mp3"}], "miss": null}, {"n": 74, "a": "第五幕", "role": "吉蘇老師", "text": "小該…", "hint": "溫柔、關心", "takes": [{"t": 1, "f": "CAM17", "s": 113.8, "e": 115.4, "x": "小該……", "no": "", "r": true, "st": "完整", "u": "clips/074_1.mp3", "c": "分段台詞/074_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 75, "a": "第五幕", "role": "小該", "text": "老師，我是不是根本沒有改變？", "hint": "低落、疑惑", "takes": [{"t": 1, "f": "C016", "s": 119.9, "e": 124.1, "x": "老師，我是不是根本沒有改變？", "no": "", "r": true, "st": "完整", "u": "clips/075_1.mp3", "c": "分段台詞/075_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 76, "a": "第五幕", "role": "吉蘇老師", "text": "不是。以前的你犯錯以後，會堅持不承認。而且把錯都怪到別人身上。但現在的你，犯錯以後，你能夠停下來、承認。", "hint": "溫柔、肯定", "takes": [{"t": 1, "f": "CAM17", "s": 117.7, "e": 136.0, "x": "不是。以前的你犯錯了以後啊，會堅持不承認，說自己沒有錯，而且會把錯都怪在別人身上。但是現在的你犯錯了以後，你卻能夠停下來、承認。", "no": "多了「說自己沒有錯」等口語", "r": true, "st": "完整", "u": "clips/076_1.mp3", "c": "分段台詞/076_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 77, "a": "第五幕", "role": "小該", "text": "同學們還是很不喜歡我", "hint": "失落", "takes": [{"t": 1, "f": "C016", "s": 126.1, "e": 128.4, "x": "同學們還是很不喜歡我。", "no": "", "r": true, "st": "完整", "u": "clips/077_1.mp3", "c": "分段台詞/077_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 78, "a": "第五幕", "role": "吉蘇老師", "text": "他們需要一點時間。", "hint": "安慰", "takes": [{"t": 1, "f": "CAM17", "s": 136.8, "e": 139.4, "x": "同學們需要一點時間。", "no": "「他們」念成「同學們」", "r": true, "st": "完整", "u": "clips/078_1.mp3", "c": "分段台詞/078_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 79, "a": "第五幕", "role": "吉蘇老師", "text": "而且…不是所有人都覺得你沒有改變喔", "hint": "帶一點神秘、微笑", "takes": [{"t": 1, "f": "CAM17", "s": 139.9, "e": 147.2, "x": "而且……不是每一個人都覺得你沒有改變喔。", "no": "「所有人」念成「每一個人」", "r": true, "st": "完整", "u": "clips/079_1.mp3", "c": "分段台詞/079_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 80, "a": "第五幕", "role": "小該", "text": "是最新款樂高機器人！！那不是小亞抽到的…", "hint": "驚訝", "takes": [{"t": 1, "f": "C016", "s": 129.9, "e": 133.6, "x": "是最新的樂高機器人！那不是小亞抽到的……", "no": "「最新款」念成「最新的」", "r": true, "st": "完整", "u": "clips/080_1.mp3", "c": "分段台詞/080_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 81, "a": "第五幕", "role": "吉蘇老師", "text": "是小亞抽到的。她剛剛拿給我，希望我把這個送給你。因為她的玩具都是扮家家酒洋娃娃，她不太會玩樂高機器人…", "hint": "解釋、溫柔", "takes": [{"t": 1, "f": "CAM17", "s": 148.3, "e": 161.7, "x": "是小亞抽到的。她剛剛拿給我，希望我把這個送給你。因為啊，她的玩具都是扮家家酒、洋娃娃之類的，她不太會玩樂高機器人。", "no": "多了「之類的」", "r": true, "st": "完整", "u": "clips/081_1.mp3", "c": "分段台詞/081_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 82, "a": "第五幕", "role": "小該", "text": "小亞給我的…她原諒我了嗎？", "hint": "感動、期待", "takes": [{"t": 1, "f": "C016", "s": 135.3, "e": 139.2, "x": "小亞給我的……她原諒我了嗎？", "no": "", "r": true, "st": "完整", "u": "clips/082_1.mp3", "c": "分段台詞/082_小該_T1_建議_C016.mp3"}], "miss": null}, {"n": 83, "a": "第五幕", "role": "吉蘇老師", "text": "我相信，她有看到你的改變喔！", "hint": "溫暖、肯定", "takes": [{"t": 1, "f": "CAM17", "s": 163.6, "e": 167.7, "x": "我相信，她有看到你的改變喔。", "no": "", "r": true, "st": "完整", "u": "clips/083_1.mp3", "c": "分段台詞/083_吉蘇老師_T1_建議_CAM17.mp3"}], "miss": null}, {"n": 84, "a": "結尾", "role": "旁白", "text": "聖誕節的奇蹟，就是當我們被耶穌的愛找到以後，我們原本堅硬的心開始被慢慢融化。", "hint": "溫暖、感人", "takes": [{"t": 1, "f": "C007", "s": 116.9, "e": 128.2, "x": "聖誕節的奇蹟，就是當我們被耶穌的愛找到的時候，我們原本堅硬的心開始被慢慢地融化。", "no": "「以後」念成「的時候」", "r": true, "st": "完整", "u": "clips/084_1.mp3", "c": "分段台詞/084_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 85, "a": "結尾", "role": "旁白", "text": "有些人的改變，一天就看得見。有些人的改變，需要很久很久。", "hint": "慢、沉穩", "takes": [{"t": 1, "f": "C007", "s": 130.0, "e": 137.4, "x": "有些人的改變，一天就看（得）見，有些人的改變需要很久很久。", "no": "待確認是否念了「得」", "r": true, "st": "完整", "u": "clips/085_1.mp3", "c": "分段台詞/085_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 86, "a": "結尾", "role": "旁白", "text": "有些人甚至今天改了，明天又跌倒。", "hint": "真誠、平靜", "takes": [{"t": 1, "f": "C007", "s": 137.9, "e": 142.2, "x": "有些人甚至今天改了，明天又跌倒。", "no": "", "r": true, "st": "完整", "u": "clips/086_1.mp3", "c": "分段台詞/086_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 87, "a": "結尾", "role": "旁白", "text": "但是沒有關係。因為耶穌不是只在我們改變成功以後才愛我們。", "hint": "安慰、溫柔", "takes": [{"t": 1, "f": "C007", "s": 142.3, "e": 150.3, "x": "但是沒有關係，因為耶穌不只是在我們改變成功以後才愛我們。", "no": "「不是只」念成「不只是」", "r": true, "st": "完整", "u": "clips/087_1.mp3", "c": "分段台詞/087_旁白_T1_建議_C007.mp3"}], "miss": null}, {"n": 88, "a": "結尾", "role": "旁白", "text": "祂是在我們還沒有改變以前，就已經愛我們。", "hint": "收尾、溫暖", "takes": [{"t": 1, "f": "C007", "s": 150.4, "e": 156.4, "x": "祂是在我們還沒有改變之前，就已經愛我們。", "no": "「以前」念成「之前」", "r": true, "st": "完整", "u": "clips/088_1.mp3", "c": "分段台詞/088_旁白_T1_建議_C007.mp3"}], "miss": null}];
+const FILES = {"C007":"A010C007","C008":"A010C008","C009":"A010C009","C010":"A010C010","C011":"A010C011","C012":"A010C012","C013":"A010C013","C014":"A010C014","C015":"A010C015","C016":"A010C016","CAM17":"CAM_0017","CAM18":"CAM_0018"};
+const RC = {"小該":"--r-xiaogai","吉蘇老師":"--r-jisu","小馬":"--r-xiaoma","小亞":"--r-xiaoya","小夫":"--r-xiaofu","同學":"--r-class","同學們":"--r-class","旁白":"--r-narr"};
+const ROLES = ["小該","吉蘇老師","小馬","小亞","小夫","同學","同學們","旁白"];
+const PLAY = '<svg viewBox="0 0 16 16"><path d="M3 1.5v13l11-6.5z"/></svg>';
+const tc = s => { const m = Math.floor(s/60); return String(m).padStart(2,"0")+":"+(s-m*60).toFixed(1).padStart(4,"0"); };
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const state = { role:null, issue:false, adlib:true, cont:false, cur:null };
+
+// stats
+const got = LINES.filter(l => l.takes.length).length;
+const part = LINES.filter(l => l.takes.some(t => t.r && t.st==="部分")).length;
+const miss = LINES.filter(l => !l.takes.length).length;
+const nt = LINES.reduce((a,l) => a + l.takes.length, 0);
+document.getElementById("stats").innerHTML =
+  `<span class="ok">已錄到 <b>${got}</b> / 88 句</span><span class="warn">只錄到部分 <b>${part}</b> 句</span><span class="bad">缺錄 <b>${miss}</b> 句</span><span>共 <b>${nt}</b> 個 take・12 個原始檔</span>`;
+
+// role chips
+const rbox = document.getElementById("roles");
+rbox.innerHTML = `<button class="btn on" data-r="">全部角色</button>` + ROLES.map(r => `<button class="btn" data-r="${r}">${r}</button>`).join("");
+rbox.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.role = b.dataset.r || null;
+  rbox.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+  render();
+});
+document.getElementById("fIssue").onclick = e => { state.issue = !state.issue; e.currentTarget.classList.toggle("on", state.issue); render(); };
+document.getElementById("fAd").onclick = e => { state.adlib = !state.adlib; e.currentTarget.classList.toggle("on", state.adlib); render(); };
+
+const isIssue = l => !l.takes.length || l.takes.some(t => t.st==="部分" || t.st==="待審");
+function render(){
+  const list = document.getElementById("list"); let html = ""; let act = null;
+  const acts = {}; LINES.forEach(l => { acts[l.a] = (acts[l.a]||0)+1; });
+  for (const l of LINES){
+    if (state.role && l.role !== state.role) continue;
+    if (state.issue && !isIssue(l)) continue;
+    if (l.a !== act){ if (act !== null) html += `</section>`; act = l.a; html += `<section class="act"><h2>${l.a}<small>${acts[l.a]} 句</small></h2>`; }
+    const col = `var(${RC[l.role]})`;
+    const rec = l.takes.find(t => t.r) || l.takes[0];
+    const flag = !l.takes.length ? `<span class="flag miss">缺錄</span>` : (rec.st==="部分" ? `<span class="flag part">只錄到部分</span>` : "");
+    const tk = l.takes.filter(t => state.adlib || t.st!=="即興").map(t =>
+      `<button class="take${t.r?" rec":""}${t.st==="即興"?" adlib":""}" data-n="${l.n}" data-t="${t.t}" title="${esc(t.x)}">${PLAY}T${t.t}${t.r?" 建議":""}${t.st==="即興"?" 即興":""}${t.st==="待審"?" 待審":""} <span class="tc">${FILES[t.f]} ${tc(t.s)}</span></button>`).join("");
+    html += `<article class="cue" id="c${l.n}" style="--rc:${col}">
+      <div class="num">${String(l.n).padStart(3,"0")}</div>
+      <div class="body">
+        <div class="head"><span class="role" style="color:${col}">${l.role}</span><span class="hint">${esc(l.hint||"")}</span>${flag}</div>
+        <p class="script">${esc(l.text)}</p>
+        ${rec ? `<p class="heard"><span>實錄</span><span>${esc(rec.x)}</span></p>${rec.no?`<div class="diff">${esc(rec.no)}</div>`:""}` : `<div class="missing">${esc(l.miss||"")}</div>`}
+        ${tk ? `<div class="takes">${tk}</div>` : ""}
+      </div></article>`;
+  }
+  if (act !== null) html += `</section>`;
+  list.innerHTML = html || `<p style="padding:30px 0;color:var(--muted)">這個篩選條件下沒有台詞。</p>`;
+  mark();
+}
+
+const au = document.getElementById("au");
+function find(n,t){ const l = LINES.find(x => x.n===n); return [l, l.takes.find(x => x.t===t)]; }
+function play(n,t,cont){
+  const [l,tk] = find(n,t); state.cur = {n,t}; state.cont = !!cont;
+  au.src = tk.u; au.play().catch(()=>{});
+  document.getElementById("who").textContent = `${String(n).padStart(3,"0")}・${l.a}・${l.role}・T${t}${tk.r?" 建議":""}・${FILES[tk.f]} ${tc(tk.s)}–${tc(tk.e)}`;
+  document.getElementById("what").textContent = tk.x;
+  mark(); setIcon(true);
+  const el = document.getElementById("c"+n); if (el && cont) el.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+}
+function mark(){
+  document.querySelectorAll(".cue.playing").forEach(e => e.classList.remove("playing"));
+  document.querySelectorAll(".take.active").forEach(e => e.classList.remove("active"));
+  if (!state.cur) return;
+  document.getElementById("c"+state.cur.n)?.classList.add("playing");
+  document.querySelector(`.take[data-n="${state.cur.n}"][data-t="${state.cur.t}"]`)?.classList.add("active");
+}
+function setIcon(p){ document.getElementById("ppi").innerHTML = p ? '<path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/>' : '<path d="M3 1.5v13l11-6.5z"/>'; document.getElementById("pp").setAttribute("aria-label", p?"暫停":"連續播放"); }
+// next recommended non-duplicate line respecting role filter
+function nextLine(n){
+  let prev = LINES.find(x => x.n===n); prev = prev && (prev.takes.find(t=>t.r)||prev.takes[0]);
+  for (const l of LINES){
+    if (l.n <= n || !l.takes.length) continue;
+    if (state.role && l.role !== state.role) continue;
+    const r = l.takes.find(t => t.r) || l.takes[0];
+    if (prev && r.u === prev.u) continue;
+    if (prev && r.f===prev.f && r.s===prev.s) continue;
+    return [l.n, r.t];
+  }
+  return null;
+}
+document.getElementById("list").addEventListener("click", e => {
+  const b = e.target.closest(".take"); if (!b) return;
+  play(+b.dataset.n, +b.dataset.t, state.cont);
+});
+document.getElementById("pp").onclick = () => {
+  if (!au.paused){ au.pause(); return; }
+  if (state.cur && au.src && au.currentTime>0 && !au.ended){ state.cont = true; au.play(); return; }
+  const start = state.cur ? state.cur.n - 1 : 0;
+  const nx = nextLine(start); if (nx) play(nx[0], nx[1], true);
+};
+au.addEventListener("pause", () => setIcon(false));
+au.addEventListener("play", () => setIcon(true));
+au.addEventListener("timeupdate", () => { document.getElementById("pbar").style.width = (au.duration ? au.currentTime/au.duration*100 : 0) + "%"; });
+document.getElementById("prog").addEventListener("click", e => { if (!au.duration) return; const r = e.currentTarget.getBoundingClientRect(); au.currentTime = (e.clientX-r.left)/r.width*au.duration; });
+au.addEventListener("ended", () => {
+  setIcon(false);
+  if (state.cont && state.cur){ const nx = nextLine(state.cur.n); if (nx) setTimeout(() => play(nx[0], nx[1], true), 450); else state.cont = false; }
+});
+document.addEventListener("keydown", e => { if (e.code==="Space" && e.target===document.body){ e.preventDefault(); document.getElementById("pp").click(); } });
+render();
+</script>
+</html>
